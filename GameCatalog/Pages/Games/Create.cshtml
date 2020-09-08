@@ -34,6 +34,22 @@
                 <span asp-validation-for="Game.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Game.Rating" class="control-label"></label>
+                <input asp-for="Game.Rating" class="form-control" />
+                <span asp-validation-for="Game.Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Game.Platform" class="control-label"></label>
+                <select asp-for="Game.Platform" class="form-control" />
+                <span asp-validation-for="Game.Platform" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Game.PlatformId" class="control-label"></label>
+                @Html.DropDownList("PlatformId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Game.PlatformId, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

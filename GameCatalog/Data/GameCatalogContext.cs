@@ -15,5 +15,7 @@ namespace GameCatalog.Data
         }
 
         public DbSet<GameCatalog.Models.Game> Game { get; set; }
+
+        public DbSet<GameCatalog.Models.Platform> Platform { get; set; }
     }
 }

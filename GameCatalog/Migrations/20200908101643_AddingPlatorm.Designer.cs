@@ -4,14 +4,16 @@ using GameCatalog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameCatalog.Migrations
 {
     [DbContext(typeof(GameCatalogContext))]
-    partial class GameCatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20200908101643_AddingPlatorm")]
+    partial class AddingPlatorm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,7 @@ namespace GameCatalog.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<int?>("PlatformId")
+                    b.Property<int>("PlatformId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -59,7 +61,7 @@ namespace GameCatalog.Migrations
 
             modelBuilder.Entity("GameCatalog.Models.Platform", b =>
                 {
-                    b.Property<int>("PlatformId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -69,7 +71,7 @@ namespace GameCatalog.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.HasKey("PlatformId");
+                    b.HasKey("Id");
 
                     b.ToTable("Platform");
                 });
@@ -78,7 +80,9 @@ namespace GameCatalog.Migrations
                 {
                     b.HasOne("GameCatalog.Models.Platform", "Platform")
                         .WithMany("Games")
-                        .HasForeignKey("PlatformId");
+                        .HasForeignKey("PlatformId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
